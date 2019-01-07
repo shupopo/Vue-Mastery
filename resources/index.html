@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div id="app">
+    <div class="nav-bar"></div>
+    <div class="product">
+
+        <div class="product-image">
+            <a v-bind:href="link">
+                <img v-bind:src="image">
+            </a>
+        </div>
+        <div class="product-info">
+            <h1>{{ product}}</h1>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
+
