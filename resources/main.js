@@ -8,7 +8,28 @@ var app = new Vue({
         inStock :false,
         inventory : 9,
         onSale:true,
-        details:["www","big","cool"]
+        details:["www","big","cool"],
+        cart:0,
+        variants:[
+            {
+                variantId:2234,
+                variantColor:"green",
+                variantImage:"./socks.jpeg"
+            },{
+                variantId:2235,
+                variantColor:"blue",
+                variantImage:"./bluesocks.jpeg"
+            }
+        ]
+    },
+    methods:{
+        addToCart:function(){
+            this.cart += 1
+        },
+        updateProduct:function(variantImage){
+            this.image=variantImage
+        }
     }
+
 });
 
