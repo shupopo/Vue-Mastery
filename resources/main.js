@@ -5,12 +5,7 @@ Vue.component('product', {
             required: true,
             default: false
         }
-        ,
-        message: {
-            type: String,
-            required: true,
-            default: "Hi"
-        }
+
     },
     template: `
     <div class="product">
@@ -37,9 +32,12 @@ Vue.component('product', {
                     :class="{disabledButton:!inStock}"
             >Add to Cart
             </button>
-             <div class="cart">
-                <p>Cart({{ cart }})</p>
-            </div>
+            <button v-on:click="removeItem"
+                    :disabled="!inStock"
+                    :class="{disabledButton:!inStock}"
+            >Remove this Item
+            </button>
+             
          </div>
     </div>`,
     data() {
@@ -51,7 +49,6 @@ Vue.component('product', {
             link: "http://www.google.com",
             onSale: true,
             details: ["www", "big", "cool"],
-            cart: 0,
             variants: [
                 {
                     variantId: 2234,
@@ -69,10 +66,13 @@ Vue.component('product', {
     },
     methods: {
         addToCart: function () {
-            this.cart += 1
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId)
         },
         updateProduct: function (index) {
             this.selectedVariant = index;
+        },
+        removeItem: function () {
+            this.$emit("remove-item", this.variants[this.selectedVariant].variantId)
         }
     },
     computed: {
@@ -94,7 +94,7 @@ Vue.component('product', {
             }
             return 2.99
         }
-    }
+    }　
 
 })
 Vue.component("product-details", {
@@ -112,6 +112,19 @@ Vue.component("product-details", {
 
 
 var app = new Vue({
-    el: "#app"
+    el: "#app",
+    data: {
+        premium: false,
+        cart: []
+    },
+    methods: {
+        updateCart(id) {
+            this.cart.push(id);
+        },
+        removeItem(id){
+            this.cart.pop()
+        }
+
+    }
 });
 
